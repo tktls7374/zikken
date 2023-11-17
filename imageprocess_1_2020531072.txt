@@ -1,0 +1,88 @@
+【情報メディア工学実験Ⅱ 簡易レポート】
+
+標題　　：c言語の復習（２）
+学籍番号：2020531072
+氏名　　：ムン　チャンホ
+提出日　：2023.10.12
+課題：4
+
+
+----------------------------------------------------------------------
+【課題4】
+
+以下の手順に従いプログラムを作成せよ
+・メンバ変数として int thre1, int thre2, double num[5] を持つ構造体を clip 型と定義する ・clip 型の実引数内のメンバ変数 num の値を，メンバ変数 thre1 以下の場合は thre1 に，thre2
+以上の場合は thre2 に変更する clipping 関数を作成する
+・clip 型の変数 a を宣言し，任意の値で初期化する
+・a を使用して clipping 関数を呼び出した後，a のメンバ変数の値を全て表示する
+
+プログラム：
+#include <stdio.h>
+#include <string.h>
+
+struct clip{
+  int thre1;
+  int thre2;
+  double num[5];
+};
+
+void clipping(struct clip*l){
+  int i;
+  for (i = 0; i < 5; i++) {
+  
+    if ((*l).num[i]<=(*l).thre1) {
+      (*l).num[i]=(*l).thre1;
+    }
+    else if ((*l).num[i]>=(*l).thre2) {
+      (*l).num[i]=(*l).thre2;
+    }
+  }
+}
+
+int main(void){
+  int i;
+  struct clip a;
+
+  printf("thre1=");
+  scanf("%d",&a.thre1);
+  printf("thre2=");
+  scanf("%d",&a.thre2);
+
+  for (i = 0; i < 5; i++) {
+    printf("num[%d]=",i);
+    scanf("%lf",&a.num[i]);
+  }
+
+  clipping(&a);
+
+  printf("thre1=%d\n",a.thre1);
+  printf("thre2=%d\n",a.thre2);
+  for (i = 0; i < 5; i++) {
+    printf("num[%d]=%lf\n",i,a.num[i]);
+  }
+
+  return 0;
+}
+
+実行結果：
+
+(base) b0531072@ma103 zikken % gcc -o 2-4 2-4.c
+(base) b0531072@ma103 zikken % ./2-4           
+thre1=10
+thre2=20
+num[0]=5
+num[1]=7
+num[2]=15
+num[3]=25
+num[4]=30
+thre1=10
+thre2=20
+num[0]=10.000000
+num[1]=10.000000
+num[2]=15.000000
+num[3]=20.000000
+num[4]=20.000000
+
+
+
+
